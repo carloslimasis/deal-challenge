@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>FishDeals</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron" align="center" style="margin-top: 50px;">
+        <h1>Welcome to FishDeals</h1>
+    </div>
+
+    <div id="deals">
+        <table class="table table-sm table-striped table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Deals</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>PublishAt</th>
+                    <th>EndAt</th>
+                    <th>Total Sold</th>
+                    <th>Type</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr th:each="deal : ${deals}">
+                <td><span th:text="${deal.title}"></span></td>
+                <td><span th:text="${#dates.format(deal.publishDate, 'dd/MM/yyyy')}"></span></td>
+                <td><span th:text="${#dates.format(deal.endDate, 'dd/MM/yyyy')}"></span></td>
+                <td><span th:text="${#numbers.formatInteger(deal.totalSold,2)}"></span></td>
+                <td><span th:text="${deal.type}"></span></td>
+                <td>
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-sm btn-success" th:href="@{/deals/new}">New</a>
+                        <a class="btn btn-sm btn-primary" th:href="@{/deals/edit/{title}(title=${deal.title})}">Edit</a>
+                        <a class="delete btn btn-sm btn-danger" th:href="@{/deals/delete/{title}(title=${deal.title})}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <thead/>
+
+    <div id="buyOptions">
+        <table class="table table-sm table-striped table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>BuyOptions</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Normal Price</th>
+                <th>Sale Price</th>
+                <th>Discount</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr th:each="buyOption : ${buyOptions}">
+                <td><span th:text="${buyOption.title}"></span></td>
+                <td><span th:text="${#numbers.formatDecimal(buyOption.normalPrice,2,2)}"></span></td>
+                <td><span th:text="${#numbers.formatDecimal(buyOption.salePrice,2,2)}"></span></td>
+                <td><span th:text="${#numbers.formatDecimal(buyOption.percentageDiscount,2,2)}"></span></td>
+                <td><span th:text="${#numbers.formatInteger(buyOption.quantityCupom,2)}"></span></td>
+                <td>
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-sm btn-success" th:href="@{/buy-options/new}">New</a>
+                        <a class="btn btn-sm btn-primary" th:href="@{/buy-options/edit/{title}(title=${buyOption.title})}">Edit</a>
+                        <a class="delete btn btn-sm btn-danger" th:href="@{/buy-options/delete/{title}(title=${buyOption.title})}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
