@@ -27,3 +27,7 @@ Then, the Deals App can be accessed on:
 ```
 http://localhost:8086
 ```
+
+## AWS
+
+http://34.229.17.134:8086/
